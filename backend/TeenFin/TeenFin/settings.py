@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'teenfinapp'
+    'teenfinapp',
+    'corsheaders',
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -48,8 +51,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',  # React app URL
+]
 ROOT_URLCONF = 'TeenFin.urls'
 
 TEMPLATES = [
@@ -76,10 +83,15 @@ WSGI_APPLICATION = 'TeenFin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',   # PostgreSQL database engine
+        'NAME': 'teenfin',                      # Database name
+        'USER': 'postgres',                      # Database user
+        'PASSWORD': 'SomSonR@2714',              # Database password
+        'HOST': 'localhost',                         # Set to empty string for localhost
+        'PORT': '5432',                              # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
