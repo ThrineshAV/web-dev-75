@@ -8,7 +8,7 @@ const features = [
   },
   {
     icon: TrendingUp,
-    title: "Budget Management",
+    title: "Budget Management.",
     description: "Create and manage your monthly budget with easy-to-use tools and insights."
   },
   {
