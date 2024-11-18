@@ -9,8 +9,11 @@ import HP from "./DashboardComponents/Homepage/Homepage"
 import Savings from "./DashboardComponents/Savings/Savings"
 import NewGoal from "./DashboardComponents/Savings/NewGoal"
 import Budgeting from "./DashboardComponents/Budgeting/Budgeting"
+import SignIn from "./components/Signup/Signup"
+import { ThemeProvider } from "./DashboardComponents/Theme/theme-provider"
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+
 const router=createBrowserRouter(
     createRoutesFromElements(
       <Route>
@@ -21,6 +24,7 @@ const router=createBrowserRouter(
         <Route path='Contacts' element={<Contacts/>}></Route>
       </Route>
       <Route path='/login' element={<Login/>}></Route>
+      <Route path='/signin' element={<SignIn/>}></Route>
       <Route path='/dashboard' element={<DBLayout/>}>
         <Route path='' element={<HP/>}></Route>
         <Route path='savings' element={<Savings/>}></Route>
@@ -33,7 +37,16 @@ const router=createBrowserRouter(
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <>
+     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      
+      <RouterProvider router={router}/>
+    </ThemeProvider>
+  
+    
+    
+    </>
+
   )
 }
 
