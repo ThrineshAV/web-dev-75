@@ -40,9 +40,9 @@ const expenseData = [
 
 
 const BudgetOverview = ({ income, expenses, savings }) => (
-  <Card>
+  <Card className='animate-fadeIn'>
     <CardHeader>
-      <CardTitle>Budget Overview</CardTitle>
+      <CardTitle className='animate-slideDown'>Budget Overview</CardTitle>
       <CardDescription>Your monthly budget at a glance</CardDescription>
     </CardHeader>
     <CardContent>
@@ -71,7 +71,7 @@ const BudgetOverview = ({ income, expenses, savings }) => (
 const ExpenseBreakdown = () => (
   <Card>
     <CardHeader>
-      <CardTitle>Expense Breakdown</CardTitle>
+      <CardTitle className='animate-slideDown'>Expense Breakdown</CardTitle>
       <CardDescription>Where your money is going</CardDescription>
     </CardHeader>
     <CardContent className="pt-0">
@@ -98,7 +98,7 @@ const ExpenseBreakdown = () => (
 )
 
 const RecentTransactions = () => (
-  <Card>
+  <Card className='animate-slideUp'>
     <CardHeader>
       <CardTitle>Recent Transactions</CardTitle>
       <CardDescription>Your latest spending activity</CardDescription>
@@ -107,7 +107,7 @@ const RecentTransactions = () => (
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Item</TableHead>
+            
             <TableHead>Category</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
@@ -115,7 +115,7 @@ const RecentTransactions = () => (
         <TableBody>
           {expenseData.map((item) => (
             <TableRow key={item.name}>
-              <TableCell className="font-medium">{item.name}</TableCell>
+              
               <TableCell>
                 <div className="flex items-center">
                   {React.createElement(item.icon, { className: "mr-2 h-4 w-4" })}
@@ -154,7 +154,7 @@ const AddExpenseForm = () => (
         </div>
         <div className="space-y-2">
           <Label htmlFor="expense-category">Category</Label>
-          <select id="expense-category" className="w-full p-2 border rounded-md">
+          <select id="expense-category" className="w-full p-2 border bg-background rounded-md">
             <option>Shopping</option>
             <option>Food</option>
             <option>Entertainment</option>
@@ -175,7 +175,7 @@ export default function BudgetingPage() {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Budgeting Dashboard</h1>
+      <h1 className="text-3xl font-bold tracking-tight animate-slideDown">Budgeting Dashboard</h1>
       
       <div className="grid gap-6 md:grid-cols-2">
         <BudgetOverview income={500} expenses={300} savings={200} />
@@ -201,6 +201,29 @@ export default function BudgetingPage() {
           </ul>
         </CardContent>
       </Card>
+      <style >{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideDown {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1.5s ease-out;
+        }
+        .animate-slideDown {
+          animation: slideDown 0.8s ease-out;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out;
+        }
+      `}</style>
     </div>
   )
 }

@@ -21,17 +21,17 @@ function Navbar(){
 return(
  
 <header className="sticky top-0 z-50 w-full border-b bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 backdrop-blur-md">
-        <div className="container flex h-14 items-center">
+        <div className="container flex h-14 items-center animate-fadeIn">
           <div className="mr-4 hidden md:flex">
             <div >
               <STF/>
             </div>
            
-            <a className="mr-6 flex items-center space-x-2" href="#">
+            <Link to={'/dashboard'} className="mr-6 flex items-center space-x-2 " >
               <DollarSign className="h-6 w-6 text-blue-400" />
               <span className="hidden font-bold sm:inline-block text-white">TeenFinance</span>
-            </a>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
+            </Link>
+            <nav className="flex items-center space-x-6 text-sm  font-medium">
               <Link to={'/dashboard'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 " style={{ animationDelay: `${0 * 100}ms` }} href="#">Home</a></Link>
               <Link to={'/dashboard/savings'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Savings</a></Link>
               <Link to={'/dashboard/budgeting'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Budgeting</a></Link>
@@ -82,6 +82,29 @@ return(
             </Avatar>
           </div>
         </div>
+        <style >{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideDown {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+        .animate-slideDown {
+          animation: slideDown 0.8s ease-out;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out;
+        }
+      `}</style>
       </header>
       
 )

@@ -29,9 +29,9 @@ function Homepage() {
       const [parentalControlsEnabled, setParentalControlsEnabled] = useState(true)
   return (
     <main className="flex-1 py-8 container px-7">
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-8 animate-fadeIn">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+            <h2 className="text-3xl font-bold tracking-tight animate-slideDown">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <Button>Download Report</Button>
             </div>
@@ -39,7 +39,7 @@ function Homepage() {
 
           {/* Overview Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
+            <Card className='animate-slideDown'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -49,7 +49,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground">+20.1% from last month</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className='animate-slideDown'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Monthly Allowance</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -59,7 +59,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground">Next payout in 5 days</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className='animate-slideDown'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Savings Goal Progress</CardTitle>
                 <PieChart className="h-4 w-4 text-muted-foreground" />
@@ -70,7 +70,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground mt-2">$780 / $1000 for new bike</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className='animate-slideDown'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Balance</CardTitle>
                 <User className="h-4 w-4 text-muted-foreground" />
@@ -111,7 +111,7 @@ function Homepage() {
           </Card>
 
           {/* Parental Controls */}
-          <Card>
+          <Card className='animate-slideDown'>
             <CardHeader>
               <CardTitle>Parental Controls</CardTitle>
               <CardDescription>Manage your child's account settings and permissions.</CardDescription>
@@ -157,6 +157,29 @@ function Homepage() {
             </CardContent>
           </Card>
         </div>
+        <style >{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideDown {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+        .animate-slideDown {
+          animation: slideDown 0.8s ease-out;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out;
+        }
+      `}</style>
       </main>
   )
 }

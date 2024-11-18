@@ -1,8 +1,7 @@
 
 import { Input } from "@/components/ui/input"
-import { DollarSign, PiggyBank, BookOpen, BarChart, Settings, Menu, Search } from 'lucide-react'
-import { cn } from "@/lib/utils"
-import { useLocation } from 'react-router-dom';
+import { DollarSign, PiggyBank,  BarChart, Settings,  Search } from 'lucide-react'
+
 import { Link } from "react-router-dom"
 import {
   Sidebar,
@@ -15,17 +14,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-const menuItems = [
-    { icon: DollarSign, label: 'Dashboard', href: '/' },
-    { icon: PiggyBank, label: 'Savings', href: '/savings' },
-    { icon: BarChart, label: 'Budgeting', href: '/budgeting' },
-    { icon: BookOpen, label: 'Learning', href: '/learning' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
-  ]
+
 
   function STF(){
-    const location = useLocation();
-  const pathname = location.pathname;
+    
+  
     return(
        <SidebarProvider>
       <Sidebar>
@@ -37,16 +30,40 @@ const menuItems = [
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
-            {menuItems.map((item) => (
-              <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton asChild isActive={pathname === item.href}>
+            
+              <SidebarMenuItem >
+                <SidebarMenuButton >
                   <Link to={'/dashboard'} className="flex items-center space-x-2 px-4 py-2">
-                    <item.icon className="h-5 w-5" />
-                    <span>{item.label}</span>
+                    <DollarSign className="h-5 w-5" />
+                    <span>Dashboard</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            ))}
+              <SidebarMenuItem >
+                <SidebarMenuButton >
+                  <Link to={'/dashboard/savings'} className="flex items-center space-x-2 px-4 py-2">
+                    <PiggyBank className="h-5 w-5" />
+                    <span>Savings</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem >
+                <SidebarMenuButton >
+                  <Link to={'/dashboard/budgeting'} className="flex items-center space-x-2 px-4 py-2">
+                    <BarChart className="h-5 w-5" />
+                    <span>Budgeting</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem >
+                <SidebarMenuButton >
+                  <Link to={'/dashboard/settings'} className="flex items-center space-x-2 px-4 py-2">
+                    <Settings className="h-5 w-5" />
+                    <span>Settings</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>

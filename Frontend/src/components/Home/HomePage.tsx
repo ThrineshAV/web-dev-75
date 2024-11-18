@@ -25,7 +25,7 @@ export default function HomePage() {
         </div>
       </main>
 
-      <style jsx>{`
+      <style >{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
