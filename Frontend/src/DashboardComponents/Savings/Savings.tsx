@@ -27,7 +27,7 @@ const savingsData = [
 ]
 
 const SavingsGoal = ({ title, current, target, icon: Icon }) => (
-  <Card>
+  <Card className='animate-fadeIn animate-slideDown'>
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">
         {title}
@@ -51,7 +51,7 @@ const SavingsGoal = ({ title, current, target, icon: Icon }) => (
 function Savings() {
   return (
     <div className="p-6 space-y-6">
-      <h2 className="text-3xl font-bold tracking-tight">Your Savings</h2>
+      <h2 className="text-3xl font-bold tracking-tight animate-fadeIn animate-slideUp">Your Savings</h2>
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <SavingsGoal 
@@ -72,7 +72,7 @@ function Savings() {
           target={1000} 
           icon={Target}
         />
-        <Card>
+        <Card className='animate-fadeIn animate-slideDown'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Total Savings
@@ -139,6 +139,29 @@ function Savings() {
           </Button></Link>
         </CardContent>
       </Card>
+      <style >{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideDown {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1.5s ease-out;
+        }
+        .animate-slideDown {
+          animation: slideDown 0.8s ease-out;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out;
+        }
+      `}</style>
     </div>
   )
 }
