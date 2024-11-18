@@ -16,41 +16,25 @@ from .serializers import ParentSerializer, TeenagerSerializer, DailyExpenseSeria
 class SignUpTeenager(generics.CreateAPIView):
     queryset = Teenager.objects.all()
     serializer_class = TeenagerSerializer
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def perform_create(self, serializer):
-        username = self.request.data.get('username')
-        password = self.request.data.get('password')
-
-        # Check if username exists
-        if User.objects.filter(username=username).exists():
-            raise PermissionDenied("Username already exists.")
-
-        # Create the User instance
-        user = User.objects.create_user(username=username, password=password)
-
-        # Save the Teenager instance with the created User
-        serializer.save(user=user)
+        # Create the Teenager instance without username and password
+        serializer.save()
 
 class SignUpParent(generics.CreateAPIView):
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def perform_create(self, serializer):
-        username = self.request.data.get('username')
-        password = self.request.data.get('password')
+        # Create the Parent instance without username and password
+        serializer.save()
 
-        # Check if username exists
-        if User.objects.filter(username=username).exists():
-            raise PermissionDenied("Username already exists.")
-
-        # Create the User instance
-        user = User.objects.create_user(username=username, password=password)
-
-        # Save the Parent instance with the created User
-        serializer.save(user=user)
-
-# Login View ```python
+# Login View
 class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
+
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -63,22 +47,22 @@ class LoginView(APIView):
 
 # Establish Parent-Teenager Relationship
 class LinkTeenagerToParent(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def post(self, request):
-        if not hasattr(request.user, 'parent'):
-            raise PermissionDenied("Only parents can link teenagers.")
-
         teenager_username = request.data.get("teenager_username")
+        parent_username = request.data.get("parent_username")
+
         teenager_user = get_object_or_404(User, username=teenager_username)
+        parent_user = get_object_or_404(User, username=parent_username)
 
         if not hasattr(teenager_user, 'teenager'):
             return Response({"error": "Provided username does not belong to a teenager."}, status=status.HTTP_400_BAD_REQUEST)
 
-        teenager = teenager_user.teenager
-        parent = request.user.parent
-
         # Establish relationship
+        teenager = teenager_user.teenager
+        parent = parent_user.parent
+
         teenager.parent = parent
         teenager.save()
 
@@ -86,12 +70,10 @@ class LinkTeenagerToParent(APIView):
 
 # Dashboard and Expense Views
 class DashboardView(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def get(self, request, pk):
         teenager = get_object_or_404(Teenager, pk=pk)
-        if teenager.parent.user != request.user:
-            raise PermissionDenied("You do not have permission to access this dashboard.")
 
         daily_expenses = DailyExpense.objects.filter(teenager=teenager)
         monthly_savings = MonthlySaving.objects.filter(teenager=teenager)
@@ -116,10 +98,10 @@ class DashboardView(generics.RetrieveAPIView):
         return Response(response_data)
 
 class ExpenseCategoryBreakdownView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def get(self, request):
-        expenses = DailyExpense.objects.filter(teenager__parent__user=request.user)
+        expenses = DailyExpense.objects.all()  # Allow access to all expenses
         breakdown = expenses.values('category').annotate(total=Sum('amount'))
 
         data = {
@@ -132,26 +114,26 @@ class ExpenseCategoryBreakdownView(APIView):
 class DailyExpenseListCreateView(generics.ListCreateAPIView):
     queryset = DailyExpense.objects.all()
     serializer_class = DailyExpenseSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def perform_create(self, serializer):
-        serializer.save(teenager=self.request.user.teenager)
+        serializer.save()  # Save without linking to a teenager
 
 class DailyExpenseDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = DailyExpense.objects.all()
     serializer_class = DailyExpenseSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
 # Monthly Saving Views
 class MonthlySavingListCreateView(generics.ListCreateAPIView):
     queryset = MonthlySaving.objects.all()
     serializer_class = MonthlySavingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
 
     def perform_create(self, serializer):
-        serializer.save(teenager=self.request.user.teenager)
+        serializer.save()  # Save without linking to a teenager
 
 class MonthlySavingDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MonthlySaving.objects.all()
     serializer_class = MonthlySavingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Allow any user to access this view
