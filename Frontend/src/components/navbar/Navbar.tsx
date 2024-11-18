@@ -38,7 +38,7 @@ function Navbar() {
                   </div>
                   <Input type="text" placeholder="Search" className="pl-10 bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ease-in-out" />
                 </div>
-                <Button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out">Sign In</Button>
+                <Link to={'/signin'}><Button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out">Sign In</Button></Link>
                 <Link to={'/login'}><Button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out">Log In</Button></Link>
               </div>
               
