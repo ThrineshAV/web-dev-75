@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bell, DollarSign,  Home, Settings, } from 'lucide-react'
+import {  DollarSign,  Home, Settings, } from 'lucide-react'
 import { Link } from "react-router-dom"
 import { Moon, Sun } from "lucide-react"
  
@@ -68,14 +68,12 @@ return(
             <div className="w-full flex-1 md:w-auto md:flex-none">
               
             </div>
-            <Button variant="ghost" size="icon">
-              <Bell className="h-4 w-4 text-white hover:text-black" />
-              <span className="sr-only">Notifications</span>
-            </Button>
-            <Button variant="ghost" size="icon">
+            
+            <Link to={"./settings"}
+            ><Button variant="ghost" size="icon">
               <Settings className="h-4 w-4 text-white hover:text-black" />
               <span className="sr-only">Settings</span>
-            </Button>
+            </Button></Link>
             <Avatar>
               <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
               <AvatarFallback>U</AvatarFallback>
