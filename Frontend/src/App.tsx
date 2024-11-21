@@ -1,6 +1,6 @@
 import Layout from "./Layout"
 import HomePage from "./components/Home/HomePage"
-import About from "./components/About/About"
+import SettingsPage from "./DashboardComponents/Settings/Settings"
 import Services from "./components/services/Services"
 import Contacts from "./components/Contacts/Contacts"
 import Login from "./components/Login/Login"
@@ -19,7 +19,7 @@ const router=createBrowserRouter(
       <Route>
       <Route path='/' element={<Layout/>}>
         <Route path='' element={<HomePage/>}></Route>
-        <Route path='About' element={<About/>}></Route>
+        
         <Route path='Services' element={<Services/>}></Route>
         <Route path='Contacts' element={<Contacts/>}></Route>
       </Route>
@@ -30,6 +30,7 @@ const router=createBrowserRouter(
         <Route path='savings' element={<Savings/>}></Route>
         <Route path='newgoal' element={<NewGoal/>}></Route>
         <Route path='budgeting' element={<Budgeting/>}></Route>
+        <Route path='settings' element={<SettingsPage/>}></Route>
       </Route>
       
       </Route>
