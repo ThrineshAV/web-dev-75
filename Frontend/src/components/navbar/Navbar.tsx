@@ -17,13 +17,13 @@ function Navbar() {
     
   
   return (
-    <nav className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 ">
+    <nav className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-gray-300 backdrop-blur-2xl shadow-2xl sticky top-0 z-10 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <a href="/" className="flex-shrink-0 flex items-center">
                 <DollarSign className="h-8 w-8 text-blue-400 animate-pulse" />
-                <span className="ml-2 text-xl font-bold text-white">FinanceHub</span>
+                <span className="ml-2 text-xl font-bold text-white">TeenFinance</span>
               </a>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">

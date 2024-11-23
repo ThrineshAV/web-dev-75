@@ -35,13 +35,13 @@ const SavingsGoal = ({ title, current, target, icon: Icon }) => (
       <Icon className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
     <CardContent>
-      <div className="text-2xl font-bold">${current}</div>
+      <div className="text-2xl font-bold">{current}</div>
       <Progress 
         value={(current / target) * 100} 
         className="mt-2"
       />
       <p className="text-xs text-muted-foreground mt-2">
-        ${current} of ${target} goal
+        {current} of {target} goal
       </p>
     </CardContent>
   </Card>
@@ -56,20 +56,20 @@ function Savings() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <SavingsGoal 
           title="Emergency Fund" 
-          current={250} 
-          target={500} 
+          current={2500} 
+          target={5000} 
           icon={Banknote}
         />
         <SavingsGoal 
           title="New Phone" 
-          current={400} 
-          target={800} 
+          current={12580} 
+          target={30000} 
           icon={PiggyBank}
         />
         <SavingsGoal 
           title="Summer Trip" 
-          current={600} 
-          target={1000} 
+          current={3000} 
+          target={10000} 
           icon={Target}
         />
         <Card className='animate-fadeIn animate-slideDown'>
@@ -80,7 +80,7 @@ function Savings() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$1,250</div>
+            <div className="text-2xl font-bold">12580</div>
             <p className="text-xs text-muted-foreground">
               +15% from last month
             </p>
