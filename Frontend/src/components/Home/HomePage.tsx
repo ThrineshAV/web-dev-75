@@ -11,7 +11,7 @@ export default function HomePage() {
   
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-gray-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-gray-300 flex flex-col">
      
 
       {/* Main content */}

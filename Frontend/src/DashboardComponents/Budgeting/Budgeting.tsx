@@ -30,11 +30,11 @@ import {
   PlusCircle
 } from 'lucide-react'
 const expenseData = [
-    { name: 'Shopping', value: 30, color: '#FF6384', icon: ShoppingBag },
-    { name: 'Phone', value: 20, color: '#36A2EB', icon: Smartphone },
-    { name: 'Food', value: 25, color: '#FFCE56', icon: Coffee },
-    { name: 'Entertainment', value: 15, color: '#4BC0C0', icon: Film },
-    { name: 'Gaming', value: 10, color: '#9966FF', icon: Gamepad },
+    { name: 'Shopping', value: 300, color: '#FF6384', icon: ShoppingBag },
+    { name: 'Phone', value: 200, color: '#36A2EB', icon: Smartphone },
+    { name: 'Food', value: 250, color: '#FFCE56', icon: Coffee },
+    { name: 'Entertainment', value: 150, color: '#4BC0C0', icon: Film },
+    { name: 'Gaming', value: 1000, color: '#9966FF', icon: Gamepad },
   ]
 
 
@@ -49,15 +49,15 @@ const BudgetOverview = ({ income, expenses, savings }) => (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <span>Income</span>
-          <span className="font-bold text-green-500">${income}</span>
+          <span className="font-bold text-green-500">{income}</span>
         </div>
         <div className="flex items-center justify-between">
           <span>Expenses</span>
-          <span className="font-bold text-red-500">${expenses}</span>
+          <span className="font-bold text-red-500">{expenses}</span>
         </div>
         <div className="flex items-center justify-between">
           <span>Savings</span>
-          <span className="font-bold text-blue-500">${savings}</span>
+          <span className="font-bold text-blue-500">{savings}</span>
         </div>
         <Progress value={(expenses / income) * 100} className="h-2" />
         <p className="text-sm text-muted-foreground">
@@ -122,7 +122,7 @@ const RecentTransactions = () => (
                   {item.name}
                 </div>
               </TableCell>
-              <TableCell className="text-right">${item.value}</TableCell>
+              <TableCell className="text-right">{item.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -178,7 +178,7 @@ export default function BudgetingPage() {
       <h1 className="text-3xl font-bold tracking-tight animate-slideDown">Budgeting Dashboard</h1>
       
       <div className="grid gap-6 md:grid-cols-2">
-        <BudgetOverview income={500} expenses={300} savings={200} />
+        <BudgetOverview income={5000} expenses={3000} savings={2000} />
         <ExpenseBreakdown />
       </div>
 

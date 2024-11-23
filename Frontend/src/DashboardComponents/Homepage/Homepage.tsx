@@ -33,7 +33,7 @@ function Homepage() {
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight animate-slideDown">Dashboard</h2>
             <div className="flex items-center space-x-2">
-              <Button>Download Report</Button>
+              
             </div>
           </div>
 
@@ -45,7 +45,7 @@ function Homepage() {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$580.00</div>
+                <div className="text-2xl font-bold">52580.00</div>
                 <p className="text-xs text-muted-foreground">+20.1% from last month</p>
               </CardContent>
             </Card>
@@ -55,7 +55,7 @@ function Homepage() {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$250.00</div>
+                <div className="text-2xl font-bold">2500.00</div>
                 <p className="text-xs text-muted-foreground">Next payout in 5 days</p>
               </CardContent>
             </Card>
@@ -65,9 +65,9 @@ function Homepage() {
                 <PieChart className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">78%</div>
-                <Progress value={78} className="mt-2" />
-                <p className="text-xs text-muted-foreground mt-2">$780 / $1000 for new bike</p>
+                <div className="text-2xl font-bold">48%</div>
+                <Progress value={48} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-2">12580 / 30000 for new bike</p>
               </CardContent>
             </Card>
             <Card className='animate-slideDown'>
@@ -76,8 +76,8 @@ function Homepage() {
                 <User className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$780</div>
-                <p className="text-xs text-muted-foreground">Out of 10 total lessons</p>
+                <div className="text-2xl font-bold">12580</div>
+                <p className="text-xs text-muted-foreground">Balance of your account</p>
               </CardContent>
             </Card>
           </div>
@@ -130,7 +130,7 @@ function Homepage() {
                       <p className="text-sm text-muted-foreground">Set a maximum weekly spending amount</p>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="text-xl font-bold">$50</span>
+                      <span className="text-xl font-bold">500</span>
                       <Button variant="outline" size="sm">Edit</Button>
                     </div>
                   </div>
