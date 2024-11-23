@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 
 import { FcGoogle } from 'react-icons/fc';
 import {Github} from "lucide-react"

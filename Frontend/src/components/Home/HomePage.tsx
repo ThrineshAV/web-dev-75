@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 
 
 
+
+
 export default function HomePage() {
   
-
+  
   
 
   return (
@@ -23,6 +25,7 @@ export default function HomePage() {
             </Button></Link>
           </div>
         </div>
+        
       </main>
 
       <style >{`
