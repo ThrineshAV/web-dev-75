@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import {  DollarSign,  Home, Settings, } from 'lucide-react'
 import { Link } from "react-router-dom"
 import { Moon, Sun } from "lucide-react"
@@ -12,12 +12,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import STF from "../Sidebar/STF"
+import { UserButton } from '@clerk/clerk-react';
 
 
 
 function Navbar(){
 
   const { setTheme } = useTheme()
+  
 return(
  
 <header className="sticky top-0 z-50 w-full border-b bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 backdrop-blur-md">
@@ -42,7 +44,7 @@ return(
             <Home className="h-4 w-4" />
             <span className="sr-only">Home</span>
           </Button>
-          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
             <div>
             <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -65,19 +67,16 @@ return(
       </DropdownMenuContent>
     </DropdownMenu>
             </div>
-            <div className="w-full flex-1 md:w-auto md:flex-none">
-              
-            </div>
+            
+      
             
             <Link to={"./settings"}
             ><Button variant="ghost" size="icon">
               <Settings className="h-4 w-4 text-white hover:text-black" />
               <span className="sr-only">Settings</span>
             </Button></Link>
-            <Avatar>
-              <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
+            <UserButton></UserButton>
+            
           </div>
         </div>
         <style >{`

@@ -2,7 +2,10 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DollarSign, Search, Menu, X, } from "lucide-react"
-import {Link,NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
+import { SignInButton } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -10,9 +13,11 @@ function Navbar() {
     const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen)
     }
+    const navigate = useNavigate();
+    
   
   return (
-    <nav className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 backdrop-blur-md">
+    <nav className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -38,8 +43,12 @@ function Navbar() {
                   </div>
                   <Input type="text" placeholder="Search" className="pl-10 bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ease-in-out" />
                 </div>
-                <Link to={'/signin'}><Button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out">Sign In</Button></Link>
-                <Link to={'/login'}><Button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out">Log In</Button></Link>
+                <SignInButton >
+        <button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out px-4 py-2 rounded font-medium" onClick={() => navigate('/dashboard')}>
+          Sign In
+        </button>
+      </SignInButton>
+                
               </div>
               
             </div>
