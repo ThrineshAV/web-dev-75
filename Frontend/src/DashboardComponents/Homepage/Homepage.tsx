@@ -39,7 +39,7 @@ function Homepage() {
 
           {/* Overview Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card className='animate-slideDown'>
+            <Card className='animate-slideDown shadow-lg'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -49,7 +49,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground">+20.1% from last month</p>
               </CardContent>
             </Card>
-            <Card className='animate-slideDown'>
+            <Card className='animate-slideDown shadow-lg'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Monthly Allowance</CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -59,7 +59,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground">Next payout in 5 days</p>
               </CardContent>
             </Card>
-            <Card className='animate-slideDown'>
+            <Card className='animate-slideDown shadow-lg'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Savings Goal Progress</CardTitle>
                 <PieChart className="h-4 w-4 text-muted-foreground" />
@@ -70,7 +70,7 @@ function Homepage() {
                 <p className="text-xs text-muted-foreground mt-2">12580 / 30000 for new bike</p>
               </CardContent>
             </Card>
-            <Card className='animate-slideDown'>
+            <Card className='animate-slideDown shadow-lg'>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Balance</CardTitle>
                 <User className="h-4 w-4 text-muted-foreground" />
@@ -83,7 +83,7 @@ function Homepage() {
           </div>
 
           {/* Savings Chart */}
-          <Card className="col-span-4">
+          <Card className="col-span-4 shadow-lg">
             <CardHeader>
               <CardTitle>Savings Overview</CardTitle>
             </CardHeader>
@@ -111,7 +111,7 @@ function Homepage() {
           </Card>
 
           {/* Parental Controls */}
-          <Card className='animate-slideDown'>
+          <Card className='animate-slideDown shadow-lg'>
             <CardHeader>
               <CardTitle>Parental Controls</CardTitle>
               <CardDescription>Manage your child's account settings and permissions.</CardDescription>

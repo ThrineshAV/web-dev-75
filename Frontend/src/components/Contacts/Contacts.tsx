@@ -10,6 +10,25 @@ import { Label } from "@/components/ui/label"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Phone, Mail, MessageCircle, HelpCircle, Send } from 'lucide-react'
 
+const GridBackground = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-teal-500/10" />
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.05) 3px, transparent 3px),
+            linear-gradient(to bottom, rgba(255,255,255,0.05) 3px, transparent 3px)
+          `,
+          backgroundSize: '60px 60px',
+          maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
+        }}
+      />
+    </div>
+  )
+}
+
 const faqs = [
   {
     question: "How do I start saving money?",
@@ -47,19 +66,20 @@ export default function ContactsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-gray-300 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <GridBackground />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl mx-auto relative "
       >
-        <h1 className="text-4xl font-bold text-center mb-8 text-blue-400">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-400 neon-text">Contact Us</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-gray-800 border-gray-700">
+          <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-500/50 hover:shadow-neon transition-shadow duration-300">
             <CardHeader>
-              <CardTitle className="flex items-center text-blue-400">
+              <CardTitle className="flex items-center text-blue-400 neon-text">
                 <MessageCircle className="mr-2" /> Get in Touch
               </CardTitle>
               <CardDescription className="text-gray-300">Send us a message and we'll get back to you soon.</CardDescription>
@@ -74,7 +94,7 @@ export default function ContactsPage() {
                     onChange={(e) => setName(e.target.value)} 
                     placeholder="Your Name" 
                     required 
-                    className="bg-gray-700 text-white border-gray-600"
+                    className="bg-gray-700 text-white border-gray-600 focus:border-blue-400 focus:ring-blue-400 neon-glow"
                   />
                 </div>
                 <div className="space-y-2">
@@ -86,7 +106,7 @@ export default function ContactsPage() {
                     onChange={(e) => setEmail(e.target.value)} 
                     placeholder="your.email@example.com" 
                     required 
-                    className="bg-gray-700 text-white border-gray-600"
+                    className="bg-gray-700 text-white border-gray-600 focus:border-blue-400 focus:ring-blue-400 neon-glow"
                   />
                 </div>
                 <div className="space-y-2">
@@ -97,19 +117,19 @@ export default function ContactsPage() {
                     onChange={(e) => setMessage(e.target.value)} 
                     placeholder="How can we help you?" 
                     required 
-                    className="bg-gray-700 text-white border-gray-600"
+                    className="bg-gray-700 text-white border-gray-600 focus:border-blue-400 focus:ring-blue-400 neon-glow"
                   />
                 </div>
-                <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
+                <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 neon-button">
                   <Send className="mr-2 h-4 w-4" /> Send Message
                 </Button>
               </form>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800 border-gray-700">
+          <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-500/50 hover:shadow-neon transition-shadow duration-300">
             <CardHeader>
-              <CardTitle className="flex items-center text-blue-400">
+              <CardTitle className="flex items-center text-blue-400 neon-text">
                 <HelpCircle className="mr-2" /> Other Ways to Reach Us
               </CardTitle>
               <CardDescription className="text-gray-300">Choose the method that works best for you.</CardDescription>
@@ -131,9 +151,9 @@ export default function ContactsPage() {
           </Card>
         </div>
 
-        <Card className="bg-gray-800 border-gray-700">
+        <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-500/50 hover:shadow-neon transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="flex items-center text-blue-400">
+            <CardTitle className="flex items-center text-blue-400 neon-text">
               <HelpCircle className="mr-2" /> Frequently Asked Questions
             </CardTitle>
             <CardDescription className="text-gray-300">Find quick answers to common questions.</CardDescription>
@@ -142,7 +162,7 @@ export default function ContactsPage() {
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-gray-700">
-                  <AccordionTrigger className="text-gray-200 hover:text-blue-400">{faq.question}</AccordionTrigger>
+                  <AccordionTrigger className="text-gray-200 hover:text-blue-400 neon-text-hover">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-gray-300">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
@@ -150,6 +170,33 @@ export default function ContactsPage() {
           </CardContent>
         </Card>
       </motion.div>
+
+      <style >{`
+        .neon-text {
+          text-shadow: 0 0 1px #00ffff;
+        }
+
+        .neon-text-hover:hover {
+          text-shadow: 0 0 2px #00ffff;
+        }
+
+        .neon-glow:focus {
+          box-shadow: 0 0 2px #00ffff;
+        }
+
+        .neon-button {
+          box-shadow: none;
+          transition: all 0.3s ease-in-out;
+        }
+
+        .neon-button:hover {
+          box-shadow: 0 0 2px #00ffff;
+        }
+
+        .shadow-neon {
+          box-shadow: 0 0 3px rgba(0, 255, 255, 0.2);
+        }
+      `}</style>
     </div>
   )
 }
