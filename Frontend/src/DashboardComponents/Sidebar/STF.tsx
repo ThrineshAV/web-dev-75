@@ -81,7 +81,7 @@ import {
       </Sidebar>
       <div className="flex min-h-screen flex-col">
         <header className="sticky top-4 z-10 flex  items-center gap-4  bg-transparent px-6">
-          <SidebarTrigger className="text-white" />
+          <SidebarTrigger className="" />
           <div className="flex-1" />
         </header>
         

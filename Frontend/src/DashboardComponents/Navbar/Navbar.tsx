@@ -22,7 +22,7 @@ function Navbar(){
   
 return(
  
-<header className="sticky top-0 z-50 w-full border-b bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 backdrop-blur-md">
+<header className="sticky top-0 z-50 w-full border-b bg-background shadow-lg">
         <div className="container flex h-14 items-center animate-fadeIn">
           <div className="mr-4 hidden md:flex">
             <div >
@@ -31,12 +31,12 @@ return(
            
             <Link to={'/dashboard'} className="mr-6 flex items-center space-x-2 " >
               <DollarSign className="h-6 w-6 text-blue-400" />
-              <span className="hidden font-bold sm:inline-block text-white">TeenFinance</span>
+              <span className="hidden font-bold sm:inline-block ">TeenFinance</span>
             </Link>
             <nav className="flex items-center space-x-6 text-sm  font-medium">
-              <Link to={'/dashboard'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 " style={{ animationDelay: `${0 * 100}ms` }} href="#">Home</a></Link>
-              <Link to={'/dashboard/savings'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Savings</a></Link>
-              <Link to={'/dashboard/budgeting'}><a className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Budgeting</a></Link>
+              <Link to={'/dashboard'}><a className="px-3 py-2 rounded-md text-sm font-medium  hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 " style={{ animationDelay: `${0 * 100}ms` }} href="#">Home</a></Link>
+              <Link to={'/dashboard/savings'}><a className="px-3 py-2 rounded-md text-sm font-medium  hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Savings</a></Link>
+              <Link to={'/dashboard/budgeting'}><a className="px-3 py-2 rounded-md text-sm font-medium  hover:text-white hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105" style={{ animationDelay: `${0 * 100}ms` }}  href="#">Budgeting</a></Link>
               
             </nav>
           </div>
@@ -72,7 +72,7 @@ return(
             
             <Link to={"./settings"}
             ><Button variant="ghost" size="icon">
-              <Settings className="h-4 w-4 text-white hover:text-black" />
+              <Settings className="h-4 w-4  hover:text-black" />
               <span className="sr-only">Settings</span>
             </Button></Link>
             <UserButton></UserButton>
