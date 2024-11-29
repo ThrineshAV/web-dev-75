@@ -40,7 +40,7 @@ const expenseData = [
 
 
 const BudgetOverview = ({ income, expenses, savings }) => (
-  <Card className='animate-fadeIn'>
+  <Card className='animate-fadeIn shadow-lg'>
     <CardHeader>
       <CardTitle className='animate-slideDown'>Budget Overview</CardTitle>
       <CardDescription>Your monthly budget at a glance</CardDescription>
@@ -69,7 +69,7 @@ const BudgetOverview = ({ income, expenses, savings }) => (
 )
 
 const ExpenseBreakdown = () => (
-  <Card>
+  <Card className='shadow-lg'>
     <CardHeader>
       <CardTitle className='animate-slideDown'>Expense Breakdown</CardTitle>
       <CardDescription>Where your money is going</CardDescription>
@@ -98,7 +98,7 @@ const ExpenseBreakdown = () => (
 )
 
 const RecentTransactions = () => (
-  <Card className='animate-slideUp'>
+  <Card className='animate-slideUp shadow-lg'>
     <CardHeader>
       <CardTitle>Recent Transactions</CardTitle>
       <CardDescription>Your latest spending activity</CardDescription>
@@ -132,7 +132,7 @@ const RecentTransactions = () => (
 )
 
 const AddExpenseForm = () => (
-  <Card>
+  <Card className='shadow-lg'>
     <CardHeader>
       <CardTitle>Add New Expense</CardTitle>
       <CardDescription>Keep track of your spending</CardDescription>
