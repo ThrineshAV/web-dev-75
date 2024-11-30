@@ -27,7 +27,7 @@ const savingsData = [
 ]
 
 const SavingsGoal = ({ title, current, target, icon: Icon }) => (
-  <Card className='animate-fadeIn animate-slideDown'>
+  <Card className='animate-fadeIn animate-slideDown shadow-lg'>
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">
         {title}
@@ -72,7 +72,7 @@ function Savings() {
           target={10000} 
           icon={Target}
         />
-        <Card className='animate-fadeIn animate-slideDown'>
+        <Card className='animate-fadeIn animate-slideDown shadow-lg'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Total Savings
@@ -88,7 +88,7 @@ function Savings() {
         </Card>
       </div>
 
-      <Card>
+      <Card className='shadow-lg'>
         <CardHeader>
           <CardTitle>Savings History</CardTitle>
           <CardDescription>
@@ -122,7 +122,7 @@ function Savings() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className='shadow-lg'>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
           <CardDescription>
