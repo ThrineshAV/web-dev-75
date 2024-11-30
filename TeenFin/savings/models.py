@@ -16,6 +16,13 @@ class Month(models.Model):
 
     def __str__(self):
         return "Month Data Record"
+class Set_Goal(models.Model):
+    title = models.CharField(max_length=255, default="")
+    amount = models.IntegerField(default=0)
+    description = models.CharField(max_length=500, default="")
+
+    def __str__(self):
+        return self.title
 
 
 # Create your models here.
