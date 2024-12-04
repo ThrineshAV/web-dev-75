@@ -52,6 +52,20 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+<<<<<<< HEAD
+=======
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:5173/',
+# ]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:5173",  # No trailing slash
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173/',
+]
+CORS_ALLOW_CREDENTIALS = True
+>>>>>>> origin/sujan
 
 ROOT_URLCONF = 'teenfin.urls'
 

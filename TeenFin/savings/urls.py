@@ -1,7 +1,11 @@
 from django.urls import path
-from .views import MonthListCreateView, MonthRetrieveUpdateDeleteView
+from .views import *
 
 urlpatterns = [
-    path('api/months/', MonthListCreateView.as_view(), name='month-list-create'),
-    path('api/months/<int:pk>/', MonthRetrieveUpdateDeleteView.as_view(), name='month-retrieve-update-delete'),
+    # Month URLs
+    path('months/', month_list_create, name='month_list_create'),
+    path('months/<int:pk>/', month_detail, name='month_detail'),
+    path('set-goals/', set_goal_list_create, name='set_goal_list_create'),
+    path('set-goals/<int:pk>/', set_goal_detail, name='set_goal_detail'),
+    
 ]
