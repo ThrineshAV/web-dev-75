@@ -11,17 +11,12 @@ class Category(models.Model):
 
 class Income(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.user.username}'s Income"
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Ensure there's a default
 
 class Savings(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Ensure there's a default
 
-    def __str__(self):
-        return f"{self.user.username}'s Savings"
 
 class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
