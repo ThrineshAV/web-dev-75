@@ -6,3 +6,4 @@ tzdata==2024.2
 djangorestframework
 psycopg2
 psycopg2-binary
+clerk-sdk
