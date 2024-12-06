@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 import { Pie, PieChart, Cell, ResponsiveContainer, Legend } from 'recharts'
 import { 
   Card, 
@@ -97,7 +97,34 @@ const ExpenseBreakdown = () => (
   </Card>
 )
 
-const RecentTransactions = () => (
+const RecentTransactions = () => {
+
+  const [expensedata,setExpensedata]=useState([])
+  const [error,setError]=useState()  
+
+  useEffect(() => {
+    const fetchExpenses = async () => {
+      try {
+        const response = await fetch('', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch expenses');
+        }
+        const data = await response.json();
+        setExpensedata(data);
+      } catch (err) {
+        setError(err.message);
+      } 
+    };
+
+    fetchExpenses();
+  }, []);
+  return(
   <Card className='animate-slideUp shadow-lg'>
     <CardHeader>
       <CardTitle>Recent Transactions</CardTitle>
@@ -128,10 +155,46 @@ const RecentTransactions = () => (
         </TableBody>
       </Table>
     </CardContent>
-  </Card>
-)
+  </Card>)
+}
 
-const AddExpenseForm = () => (
+const AddExpenseForm = () => {
+
+  const [expenseName, setExpenseName] = useState('')
+  const [amount, setAmount] = useState('')
+  const [category, setCategory] = useState('Food')
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+
+    const newExpense = { expenseName, amount: parseFloat(amount), category }
+
+    try {
+      const response = await fetch('http://localhost:8000/api/budgeting/expenses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newExpense),
+      }) 
+
+
+      if (!response.ok) {
+        throw new Error('Failed to add expense')
+      }
+
+      console.log('Expense added:', await response.json())
+
+      // Clear the form upon success
+      setExpenseName('')
+      setAmount('')
+      setCategory('Shopping')
+    } catch (err) {
+      
+      console.error('Error:', err)
+    } 
+  }
+  return(
   <Card className='shadow-lg'>
     <CardHeader>
       <CardTitle>Add New Expense</CardTitle>
@@ -142,32 +205,36 @@ const AddExpenseForm = () => (
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="expense-name">Expense Name</Label>
-            <Input id="expense-name" placeholder="e.g., Movie Ticket" />
+            <Input id="expense-name" placeholder="e.g., Movie Ticket" value={expenseName} onChange={(e)=>{
+              setExpenseName(e.target.value)
+            }}/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="expense-amount">Amount</Label>
             <div className="relative">
               <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <Input id="expense-amount" type="number" className="pl-8" placeholder="0.00" />
+              <Input id="expense-amount" type="number" className="pl-8" placeholder="0.00" value={amount} onChange={(e)=>{
+                setAmount(e.target.value)
+              }} />
             </div>
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="expense-category">Category</Label>
-          <select id="expense-category" className="w-full p-2 border bg-background rounded-md">
+          <select id="expense-category" className="w-full p-2 border bg-background rounded-md" value={category} onChange={(e)=>setCategory(e.target.value)}>
             <option>Shopping</option>
             <option>Food</option>
             <option>Entertainment</option>
             <option>Other</option>
           </select>
         </div>
-        <Button className="w-full">
+        <Button className="w-full" onClick={handleSubmit}>
           <PlusCircle className="mr-2 h-4 w-4" /> Add Expense
         </Button>
       </form>
     </CardContent>
-  </Card>
-)
+  </Card>)
+}
 
 export default function BudgetingPage() {
     

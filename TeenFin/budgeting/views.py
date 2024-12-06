@@ -1,32 +1,31 @@
 from rest_framework import viewsets, generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from .models import Category, Income, Savings, Expense
 from .serializers import CategorySerializer, IncomeSerializer, SavingsSerializer, ExpenseSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [AllowAny]
 
 class IncomeView(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = IncomeSerializer
 
     def get_object(self):
-        return Income.objects.get_or_create(user=self.request.user)[0]
+        return Income.objects.first()  # This will return the first Income object or None if it doesn't exist
 
 class SavingsView(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = SavingsSerializer
 
     def get_object(self):
-        return Savings.objects.get_or_create(user=self.request.user)[0]
+        return Savings.objects.first()  # This will return the first Savings object or None if it doesn't exist
 
 class ExpenseViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
-
-    def get_queryset(self):
-        return Expense.objects.filter(user=self.request.user)
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save()  # Remove the user association
