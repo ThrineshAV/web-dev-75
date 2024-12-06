@@ -105,7 +105,7 @@ const RecentTransactions = () => {
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
-        const response = await fetch('', {
+        const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const RecentTransactions = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {expenseData.map((item) => (
+          {expensedata.map((item) => (
             <TableRow key={item.name}>
               
               <TableCell>
@@ -149,7 +149,7 @@ const RecentTransactions = () => {
                   {item.name}
                 </div>
               </TableCell>
-              <TableCell className="text-right">{item.value}</TableCell>
+              <TableCell className="text-right">{item.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -159,7 +159,7 @@ const RecentTransactions = () => {
 }
 
 const AddExpenseForm = () => {
-
+  
   const [expenseName, setExpenseName] = useState('')
   const [amount, setAmount] = useState('')
   const [category, setCategory] = useState('Food')
@@ -167,14 +167,17 @@ const AddExpenseForm = () => {
     e.preventDefault()
     
 
-    const newExpense = { expenseName, amount: parseFloat(amount), category }
+    const newExpense = { "name": expenseName,
+    "amount": amount,
+     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/budgeting/expenses', {
+      const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(newExpense),
       }) 
 
