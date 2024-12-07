@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'budgeting',
-    'savings'
+    'savings',
+    'auth',
 ]
 
 MIDDLEWARE = [
@@ -35,14 +36,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'authentication.middleware.clerk_session_middleware',
 ]
-<<<<<<< HEAD
 # <<<<<<< HEAD
+# # <<<<<<< HEAD
+# # =======
 # =======
-=======
 
->>>>>>> 05a4a0b2b43e3686941a6eaa1e970185efb69fee
+# >>>>>>> 05a4a0b2b43e3686941a6eaa1e970185efb69fee
 # CORS_ALLOWED_ORIGINS = [
 #     'http://localhost:5173/',
 # ]
@@ -54,15 +54,23 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173/',
 ]
 CORS_ALLOW_CREDENTIALS = True
-<<<<<<< HEAD
-# >>>>>>> origin/sujan
-=======
+# <<<<<<< HEAD
+# # >>>>>>> origin/sujan
+# =======
 
->>>>>>> 05a4a0b2b43e3686941a6eaa1e970185efb69fee
+# >>>>>>> 05a4a0b2b43e3686941a6eaa1e970185efb69fee
 
 ROOT_URLCONF = 'teenfin.urls'
 
+AUTH_USER_MODEL = 'auth.CustomUser'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
