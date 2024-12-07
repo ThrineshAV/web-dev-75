@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'budgeting',
     'savings',
-    'auth',
+    'custom_auth',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'teenfin.urls'
 
-AUTH_USER_MODEL = 'auth.CustomUser'
+AUTH_USER_MODEL = 'custom_auth.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
