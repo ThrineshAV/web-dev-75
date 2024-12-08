@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'budgeting',
     'savings',
@@ -62,14 +63,21 @@ CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'teenfin.urls'
 
-AUTH_USER_MODEL = 'custom_auth.CustomUser'
+
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
+AUTH_USER_MODEL = 'custom_auth.CustomUser'
 CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
