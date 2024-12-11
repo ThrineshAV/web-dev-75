@@ -17,11 +17,9 @@ class SavingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ExpenseSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)  # Nested category
-    category_id = serializers.PrimaryKeyRelatedField(
-        queryset=Category.objects.all(), source='category', write_only=True
-    )  # For creating/updating
-
+    # For creating/updating
+    
     class Meta:
         model = Expense
-        fields = ['id', 'name', 'amount', 'date', 'category', 'category_id']
+        fields = '__all__'
+        
