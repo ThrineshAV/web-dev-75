@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 
-import {  DollarSign,  Home, Settings, } from 'lucide-react'
+import {  DollarSign,  Home } from 'lucide-react'
 import { Link } from "react-router-dom"
 import { Moon, Sun } from "lucide-react"
  
@@ -70,11 +70,7 @@ return(
             
       
             
-            <Link to={"./settings"}
-            ><Button variant="ghost" size="icon">
-              <Settings className="h-4 w-4  hover:text-black" />
-              <span className="sr-only">Settings</span>
-            </Button></Link>
+           
             <UserButton></UserButton>
             
           </div>

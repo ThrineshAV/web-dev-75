@@ -131,12 +131,7 @@ function Savings() {
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row gap-4 text">
           <Link to={'/dashboard/newgoal'} className="flex-1 "><Button className='w-full' >Set New Goal</Button></Link>
-          <Link to={'/dashboard/newgoal'} className="flex-1"><Button className='w-full'  >
-            Transfer to Savings
-          </Button></Link>
-          <Link to={'/dashboard/newgoal'} className="flex-1"><Button className='w-full'  >
-            View Savings Tips
-          </Button></Link>
+          
         </CardContent>
       </Card>
       <style >{`
