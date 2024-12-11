@@ -44,9 +44,9 @@ MIDDLEWARE = [
 # =======
 
 # >>>>>>> 05a4a0b2b43e3686941a6eaa1e970185efb69fee
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173/',
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173/',
+]
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:5173",  # No trailing slash
 ]
