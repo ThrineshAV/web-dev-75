@@ -6,22 +6,42 @@ function Signup() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [username,setUsername]=useState("")
+  const [password2,setPassword2]=useState("")
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault()
-    console.log(email)
-    console.log(password)
-    console.log(username)
-    axios.post('http://localhost:8000/api/auth/register',{
-      email:email,
-      username:username,
-      password:password,
-      password2:password
-    }).then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
+    // axios.post('http://127.0.0.1:8000/api/auth/register/',{
+    //   email:email,
+    //   username:username,
+    //   password:password,
+    //   password2:password2
+    // }).then((res)=>{
+    //   console.log(res)
+    // }).catch((err)=>{
+    //   console.log(err)
+    // })
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email:email,
+          username:username,
+          password:password,
+          password2:password2
+        }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        throw Error(JSON.stringify(errorData));
+      }
+    } catch (error: any) {
+      throw Error(error);
+    }
+  };
   }
   
   return (
@@ -67,6 +87,20 @@ function Signup() {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your password"
+            
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">
+              Renter Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
               className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your password"
             

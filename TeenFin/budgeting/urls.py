@@ -11,3 +11,4 @@ urlpatterns = [
     path('savings/', SavingsView.as_view(), name='savings'),
     path('', include(router.urls)),
 ]
+
