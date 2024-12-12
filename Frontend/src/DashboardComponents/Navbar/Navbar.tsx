@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import STF from "../Sidebar/STF"
-import { UserButton } from '@clerk/clerk-react';
+
 
 
 
@@ -71,7 +71,7 @@ return(
       
             
            
-            <UserButton></UserButton>
+            
             
           </div>
         </div>

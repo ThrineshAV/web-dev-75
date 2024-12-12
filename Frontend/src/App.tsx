@@ -9,11 +9,13 @@ import HP from "./DashboardComponents/Homepage/Homepage"
 import Savings from "./DashboardComponents/Savings/Savings"
 import NewGoal from "./DashboardComponents/Savings/NewGoal"
 import Budgeting from "./DashboardComponents/Budgeting/Budgeting"
-
+import Login from "./components/Login/Login"
+import Signup from "./components/Signup/Signup"
 import { ThemeProvider } from "./DashboardComponents/Theme/theme-provider"
-import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react';
+
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+
 
 const router=createBrowserRouter(
     createRoutesFromElements(
@@ -24,11 +26,12 @@ const router=createBrowserRouter(
           <Route path='Services' element={<Services/>}></Route>
           <Route path='Contacts' element={<Contacts/>}></Route>
         </Route>
-        
+        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/dashboard' element={
-        <SignedIn>
+        
         <DBLayout/>
-        </SignedIn>
+        
         }>
           <Route path='' element={<HP/>}></Route>
           <Route path='savings' element={<Savings/>}></Route>
@@ -36,14 +39,7 @@ const router=createBrowserRouter(
           <Route path='budgeting' element={<Budgeting/>}></Route>
           <Route path='settings' element={<SettingsPage/>}></Route>
         </Route>
-        <Route
-        path="/dashboard"
-        element={
-          <SignedOut>
-            <RedirectToSignIn />
-          </SignedOut>
-        }
-      ></Route>
+        
         
     
       

@@ -42,10 +42,12 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # No trailing slash
+    'http://localhost:5173',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',  # Optional, but better without trailing slash
+    'http://localhost:5173',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -113,6 +115,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
+
+APPEND_SLASH = False
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

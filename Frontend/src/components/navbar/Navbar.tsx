@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DollarSign, Search, Menu, X } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import { SignInButton } from '@clerk/clerk-react'
+
 import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
@@ -39,11 +39,14 @@ function Navbar() {
                 </div>
                 <Input type="text" placeholder="Search" className="pl-10 bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ease-in-out neon-glow" />
               </div>
-              <SignInButton>
-                <button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out px-4 py-2 rounded font-medium neon-button" onClick={() => navigate('/dashboard')}>
-                  Sign In
+              <button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out px-4 py-2 rounded font-medium neon-button" onClick={() => navigate('/signup')}>
+                  SignIn
                 </button>
-              </SignInButton>
+                
+                <button className="ml-4 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 ease-in-out px-4 py-2 rounded font-medium neon-button" onClick={() => navigate('/login')}>
+                  Login
+                </button>
+              
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
