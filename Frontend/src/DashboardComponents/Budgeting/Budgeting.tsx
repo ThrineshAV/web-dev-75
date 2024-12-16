@@ -29,6 +29,7 @@ import {
   Gamepad,
   PlusCircle
 } from 'lucide-react'
+import { title } from 'process'
 const expenseData = [
     { name: 'Shopping', value: 300, color: '#FF6384', icon: ShoppingBag },
     { name: 'Phone', value: 200, color: '#36A2EB', icon: Smartphone },
@@ -98,7 +99,27 @@ const ExpenseBreakdown = () => (
 )
 
 const RecentTransactions = () => {
+  const[Expenses,setExpenses]=useState()
+  const[Error,setError]=useState()
+  const[Loading,setLoading]=useState(false)
+  useEffect(() => {
+    // Function to fetch data
+    const fetchExpenses = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/budgeting/expenses/");
+        
+        const data = await response.json();
+        console.log(data) // Parse JSON from response
+        setExpenses(data); // Set the data
+      } catch (err) {
+        setError(err.message); // Set the error message
+      } finally {
+        setLoading(false); // Disable loading
+      }
+    };
 
+    fetchExpenses();
+  }, []);
 
   return(
   <Card className='animate-slideUp shadow-lg'>
@@ -154,10 +175,10 @@ const AddExpenseForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: expenseName,
+        title: expenseName,
         amount:amount ,
         category: category,
-        user:'sanketsnayak89@gmail.com'
+        
         
       })
     });
