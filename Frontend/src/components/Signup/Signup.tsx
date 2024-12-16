@@ -1,26 +1,26 @@
 import  { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Loader } from 'lucide-react'
 
 
-import axios from 'axios'
+
+
 function Signup() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [username,setUsername]=useState("")
   const [password2,setPassword2]=useState("")
+  const [error,setError]=useState("")
+  const [errorPassword,setErrorPassword]=useState("")
+  const [loading,setLoading]=useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
-    // axios.post('http://127.0.0.1:8000/api/auth/register/',{
-    //   email:email,
-    //   username:username,
-    //   password:password,
-    //   password2:password2
-    // }).then((res)=>{
-    //   console.log(res)
-    // }).catch((err)=>{
-    //   console.log(err)
-    // })
+    
     try {
+      setLoading(true)
+      new Promise((resolve)=>setTimeout(resolve, 2000))
       const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
         method: "POST",
         headers: {
@@ -31,18 +31,36 @@ function Signup() {
           username:username,
           password:password,
           password2:password2
-        }),
+        })
       });
+      setTimeout(()=>{
+        setLoading(false)
+      },2000)
       if (!response.ok) {
         const errorData = await response.json();
+        console.log(errorData)
+        setErrorPassword(JSON.stringify(errorData.password))
+        if(errorPassword){
+          setError("password is too small")
+        }else{
+          setError("user Already exists")
+        }
+        
         console.log(errorData);
-        throw Error(JSON.stringify(errorData));
+        
       }
-    } catch (error: any) {
+      else{
+        navigate("/login")
+      }
+    } catch (error:any) {
+      setLoading(false)
       throw Error(error);
     }
+    finally{
+      setLoading(false)
+    }
   };
-  }
+  
   
   return (
     <>
@@ -110,8 +128,9 @@ function Signup() {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            Signup
+             {loading ? (<span className="flex items-center justify-center"><Loader className='animate-spin' />Please wait</span> ) : ('Register')}
           </button>
+          <div className='text-red-700 flex justify-center items-center my-4'>{error}</div>
         </form>
         <p className="text-center text-gray-600 mt-4">
           Already registered?{" "}

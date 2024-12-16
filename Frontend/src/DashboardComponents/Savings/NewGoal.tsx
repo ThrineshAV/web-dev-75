@@ -19,7 +19,7 @@ function NewGoal(){
                 <label htmlFor="i1" className="font-semibold">Title</label>
                 <Input id="i1" placeholder="title" value={title} onChange={(e)=>{
                     setTitle(e.target.value)
-                }} className="border border-gray-300  focus:ring-0 focus:outline-none focus:border-opacity-50 focus:border-2  placeholder:text-base placeholder:text-slate-400" ></Input>
+                }} className="border border-gray-300  focus:ring-0 focus:outline-none focus:border-opacity-50 focus:border-2 bg-background  placeholder:text-base placeholder:text-slate-400 px-3 py-2 rounded-md" ></Input>
             </div>
             <div className="my-4 flex flex-col">
                 <label htmlFor="i2" className="font-semibold">Amount</label>
@@ -29,15 +29,15 @@ function NewGoal(){
             </div>
             <div className="flex flex-col my-4">
                 <label htmlFor="i3" className="font-semibold">Description</label>
-                <textarea name="" id="i3" placeholder="Enter the description of your goal " className="border bg-background rounded h-24 px-3 py-2" value={description} onChange={(e)=>{
+                <textarea name="" id="i3" placeholder="Enter the description of your goal " className="border border-gray-300  focus:ring-0 focus:outline-none focus:border-opacity-50 focus:border-2 bg-background  placeholder:text-base placeholder:text-slate-400 px-3 py-2 rounded-md" value={description} onChange={(e)=>{
                     setDescription(e.target.value)
                 }}></textarea>
             </div>
             <div className="flex flex-col my-4">
                 <label htmlFor="i4" className="font-semibold">Upload the svg</label>
-                <input type="file" name="" id="i4" className="mt-1" />
+                <input type="file" name="" id="i4" className="mt-1 bg-background" />
             </div>
-            <Button className="px-6 mt-3">Submit</Button>
+            <Button className="px-6 mt-3 bg-green-600 text-white">Submit</Button>
         </div>
        </div>
     )

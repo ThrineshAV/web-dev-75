@@ -99,31 +99,7 @@ const ExpenseBreakdown = () => (
 
 const RecentTransactions = () => {
 
-  const [expensedata,setExpensedata]=useState([])
-  const [error,setError]=useState()  
 
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch expenses');
-        }
-        const data = await response.json();
-        setExpensedata(data);
-      } catch (err) {
-        setError(err.message);
-      } 
-    };
-
-    fetchExpenses();
-  }, []);
   return(
   <Card className='animate-slideUp shadow-lg'>
     <CardHeader>
@@ -140,7 +116,7 @@ const RecentTransactions = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {expensedata.map((item) => (
+          {expenseData.map((item) => (
             <TableRow key={item.name}>
               
               <TableCell>
@@ -149,7 +125,7 @@ const RecentTransactions = () => {
                   {item.name}
                 </div>
               </TableCell>
-              <TableCell className="text-right">{item.amount}</TableCell>
+              <TableCell className="text-right">{item.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -160,43 +136,45 @@ const RecentTransactions = () => {
 
 const AddExpenseForm = () => {
   
-  const [expenseName, setExpenseName] = useState('')
-  const [amount, setAmount] = useState('')
-  const [category, setCategory] = useState('Food')
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+ const [expenseName, setExpenseName] = useState('')
+ const [amount, setAmount] = useState('')
+ const [category, setCategory] = useState('Shopping')
+ 
+ 
+
+ const handleSubmit = async (e)=>{
+  e.preventDefault()
+  
+  try {
     
-
-    const newExpense = { "name": expenseName,
-    "amount": amount,
-     }
-
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(newExpense),
-      }) 
-
-
-      if (!response.ok) {
-        throw new Error('Failed to add expense')
-      }
-
-      console.log('Expense added:', await response.json())
-
-      // Clear the form upon success
-      setExpenseName('')
-      setAmount('')
-      setCategory('Shopping')
-    } catch (err) {
+    
+    const response = await fetch("http://127.0.0.1:8000/api/budgeting/expenses/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: expenseName,
+        amount:amount ,
+        category: category,
+        user:'sanketsnayak89@gmail.com'
+        
+      })
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(JSON.stringify(errorData));
       
-      console.error('Error:', err)
-    } 
+    }
+   
+    
+  } catch (error:any) {
+    
+    throw Error(error);
   }
+  
+};
   return(
   <Card className='shadow-lg'>
     <CardHeader>
