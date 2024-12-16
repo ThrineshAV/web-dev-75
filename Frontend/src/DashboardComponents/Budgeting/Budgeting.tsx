@@ -29,7 +29,7 @@ import {
   Gamepad,
   PlusCircle
 } from 'lucide-react'
-import { title } from 'process'
+
 const expenseData = [
     { name: 'Shopping', value: 300, color: '#FF6384', icon: ShoppingBag },
     { name: 'Phone', value: 200, color: '#36A2EB', icon: Smartphone },
@@ -98,62 +98,74 @@ const ExpenseBreakdown = () => (
   </Card>
 )
 
+
+
+interface Expense {
+  id: number;
+  title: string;
+  amount: string;
+  category: string;
+}
+
 const RecentTransactions = () => {
-  const[Expenses,setExpenses]=useState()
-  const[Error,setError]=useState()
-  const[Loading,setLoading]=useState(false)
+  const [Expenses, setExpenses] = useState<Expense[]>([]); // Specify type as an array of Expense
+  const [Loading, setLoading] = useState(false);
+
   useEffect(() => {
-    // Function to fetch data
     const fetchExpenses = async () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/budgeting/expenses/");
-        
-        const data = await response.json();
-        console.log(data) // Parse JSON from response
-        setExpenses(data); // Set the data
+        const data: Expense[] = await response.json(); // Cast API response to the Expense array type
+        console.log(data); // Log fetched data
+        setExpenses(data);
       } catch (err) {
-        setError(err.message); // Set the error message
+        console.error("Error fetching expenses:", err);
       } finally {
-        setLoading(false); // Disable loading
+        setLoading(false);
       }
     };
 
     fetchExpenses();
   }, []);
 
-  return(
-  <Card className='animate-slideUp shadow-lg'>
-    <CardHeader>
-      <CardTitle>Recent Transactions</CardTitle>
-      <CardDescription>Your latest spending activity</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            
-            <TableHead>Category</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {expenseData.map((item) => (
-            <TableRow key={item.name}>
-              
-              <TableCell>
-                <div className="flex items-center">
-                  {React.createElement(item.icon, { className: "mr-2 h-4 w-4" })}
-                  {item.name}
-                </div>
-              </TableCell>
-              <TableCell className="text-right">{item.value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </CardContent>
-  </Card>)
-}
+  return (
+    <Card className="animate-slideUp shadow-lg">
+      <CardHeader>
+        <CardTitle>Recent Transactions</CardTitle>
+        <CardDescription>Your latest spending activity</CardDescription>
+      </CardHeader>
+      <CardContent>
+        {Loading ? (
+          <p>Loading...</p> // Show a loading message while data is being fetched
+        ) : Expenses.length > 0 ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Category</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Expenses.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.category}</TableCell>
+                  <TableCell>{item.title}</TableCell>
+                  <TableCell className="text-right">{item.amount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <p>No transactions found.</p> // Handle case when no data is returned
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
+
+
 
 const AddExpenseForm = () => {
   
@@ -177,7 +189,7 @@ const AddExpenseForm = () => {
       body: JSON.stringify({
         title: expenseName,
         amount:amount ,
-        category: category,
+        category:category,
         
         
       })
