@@ -29,6 +29,7 @@ import {
   Gamepad,
   PlusCircle
 } from 'lucide-react'
+
 const expenseData = [
     { name: 'Shopping', value: 300, color: '#FF6384', icon: ShoppingBag },
     { name: 'Phone', value: 200, color: '#36A2EB', icon: Smartphone },
@@ -97,106 +98,116 @@ const ExpenseBreakdown = () => (
   </Card>
 )
 
-const RecentTransactions = () => {
 
-  const [expensedata,setExpensedata]=useState([])
-  const [error,setError]=useState()  
+
+interface Expense {
+  id: number;
+  title: string;
+  amount: string;
+  category: string;
+}
+
+const RecentTransactions = () => {
+  const [Expenses, setExpenses] = useState<Expense[]>([]); // Specify type as an array of Expense
+  const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch expenses');
-        }
-        const data = await response.json();
-        setExpensedata(data);
+        const response = await fetch("http://127.0.0.1:8000/api/budgeting/expenses/");
+        const data: Expense[] = await response.json(); // Cast API response to the Expense array type
+        console.log(data); // Log fetched data
+        setExpenses(data);
       } catch (err) {
-        setError(err.message);
-      } 
+        console.error("Error fetching expenses:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchExpenses();
   }, []);
-  return(
-  <Card className='animate-slideUp shadow-lg'>
-    <CardHeader>
-      <CardTitle>Recent Transactions</CardTitle>
-      <CardDescription>Your latest spending activity</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            
-            <TableHead>Category</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {expensedata.map((item) => (
-            <TableRow key={item.name}>
-              
-              <TableCell>
-                <div className="flex items-center">
-                  {React.createElement(item.icon, { className: "mr-2 h-4 w-4" })}
-                  {item.name}
-                </div>
-              </TableCell>
-              <TableCell className="text-right">{item.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </CardContent>
-  </Card>)
-}
+
+  return (
+    <Card className="animate-slideUp shadow-lg">
+      <CardHeader>
+        <CardTitle>Recent Transactions</CardTitle>
+        <CardDescription>Your latest spending activity</CardDescription>
+      </CardHeader>
+      <CardContent>
+        {Loading ? (
+          <p>Loading...</p> // Show a loading message while data is being fetched
+        ) : Expenses.length > 0 ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Category</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Expenses.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.category}</TableCell>
+                  <TableCell>{item.title}</TableCell>
+                  <TableCell className="text-right">{item.amount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <p>No transactions found.</p> // Handle case when no data is returned
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
+
+
 
 const AddExpenseForm = () => {
   
-  const [expenseName, setExpenseName] = useState('')
-  const [amount, setAmount] = useState('')
-  const [category, setCategory] = useState('Food')
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+ const [expenseName, setExpenseName] = useState('')
+ const [amount, setAmount] = useState('')
+ const [category, setCategory] = useState('Shopping')
+ 
+ 
+
+ const handleSubmit = async (e)=>{
+  e.preventDefault()
+  
+  try {
     
-
-    const newExpense = { "name": expenseName,
-    "amount": amount,
-     }
-
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/budgeting/expenses/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(newExpense),
-      }) 
-
-
-      if (!response.ok) {
-        throw new Error('Failed to add expense')
-      }
-
-      console.log('Expense added:', await response.json())
-
-      // Clear the form upon success
-      setExpenseName('')
-      setAmount('')
-      setCategory('Shopping')
-    } catch (err) {
+    
+    const response = await fetch("http://127.0.0.1:8000/api/budgeting/expenses/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: expenseName,
+        amount:amount ,
+        category:category,
+        
+        
+      })
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(JSON.stringify(errorData));
       
-      console.error('Error:', err)
-    } 
+    }
+   
+    
+  } catch (error:any) {
+    
+    throw Error(error);
   }
+  
+};
   return(
   <Card className='shadow-lg'>
     <CardHeader>

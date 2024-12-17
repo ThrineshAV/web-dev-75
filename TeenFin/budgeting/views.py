@@ -1,31 +1,43 @@
-from rest_framework import viewsets, generics
-from rest_framework.permissions import AllowAny
-from .models import Category, Income, Savings, Expense
-from .serializers import CategorySerializer, IncomeSerializer, SavingsSerializer, ExpenseSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Expense
+from .serializers import ExpenseSerializer
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    permission_classes = [AllowAny]
+# List all expenses or create a new expense
+@api_view(['GET', 'POST'])
+def expense_list_create(request):
+    if request.method == 'GET':
+        expenses = Expense.objects.all()
+        serializer = ExpenseSerializer(expenses, many=True)
+        return Response(serializer.data)
 
-class IncomeView(generics.RetrieveUpdateAPIView):
-    permission_classes = [AllowAny]
-    serializer_class = IncomeSerializer
+    elif request.method == 'POST':
+        serializer = ExpenseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get_object(self):
-        return Income.objects.first()  # This will return the first Income object or None if it doesn't exist
+# Retrieve, update, or delete a specific expense
+@api_view(['GET', 'PUT', 'DELETE'])
+def expense_detail(request, pk):
+    try:
+        expense = Expense.objects.get(pk=pk)
+    except Expense.DoesNotExist:
+        return Response({'error': 'Expense not found'}, status=status.HTTP_404_NOT_FOUND)
 
-class SavingsView(generics.RetrieveUpdateAPIView):
-    permission_classes = [AllowAny]
-    serializer_class = SavingsSerializer
+    if request.method == 'GET':
+        serializer = ExpenseSerializer(expense)
+        return Response(serializer.data)
 
-    def get_object(self):
-        return Savings.objects.first()  # This will return the first Savings object or None if it doesn't exist
+    elif request.method == 'PUT':
+        serializer = ExpenseSerializer(expense, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ExpenseViewSet(viewsets.ModelViewSet):
-    queryset = Expense.objects.all()
-    serializer_class = ExpenseSerializer
-    permission_classes = [AllowAny]
-
-    def perform_create(self, serializer):
-        serializer.save()  # Remove the user association
+    elif request.method == 'DELETE':
+        expense.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
